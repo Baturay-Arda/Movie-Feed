@@ -13,6 +13,7 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+    
 
 
 class Review(models.Model):
@@ -35,6 +36,7 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.movie}"
+    
 
 
 class Rating(models.Model):
@@ -58,3 +60,14 @@ class Rating(models.Model):
 
     def __str__(self):
         return f"{self.movie} - {self.score}"
+    
+
+    
+class WatchList(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'movie')
