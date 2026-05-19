@@ -31,57 +31,18 @@ MovieFeed is a Django-based movie web application where users can register, log 
 Movie_Feed/
 ├── config/               # Project settings and URLs
 ├── movies/               # Movie app (models, views, urls)
+    ├── templates/movies
+        └── movie_detail.html
+        └── movie_list.html
+        └── watchlist.html
 ├── users/                # Authentication system
 ├── templates/            # Global templates
-│   ├── registration/     # login & register pages
-│   └── movies/           # movie pages
+    ├── base.html    
+  ├──registration/        # login & register pages
+      └── login.html
+      └── register.html
 ├── manage.py
-
----
-
-##  Installation
-
-### 1. Clone the repository
-git clone https://github.com/yourusername/moviefeed.git
-cd moviefeed
-
----
-
-### 2. Create virtual environment
-python -m venv venv
-venv\Scripts\activate   # Windows
-
----
-
-### 3. Install dependencies
-pip install -r requirements.txt
-
----
-
-### 4. Setup database (PostgreSQL)
-Update database credentials in settings.py or .env file.
-
----
-
-### 5. Run migrations
-python manage.py makemigrations
-python manage.py migrate
-
----
-
-### 6. Create superuser (optional)
-python manage.py createsuperuser
-
----
-
-### 7. Run server
-python manage.py runserver
-
----
-
-##  Authentication Flow
-
-Register → Login → Movies → Movie Detail → Watchlist → Logout
+├── templates
 
 ---
 
@@ -92,15 +53,3 @@ Register → Login → Movies → Movie Detail → Watchlist → Logout
 - Search and filter
 - API integration (TMDB)
 - Deployment (Render / Railway)
-
----
-
-##  Author
-
-Developed by Baturay
-
----
-
-##  License
-
-This project is for educational purposes.
