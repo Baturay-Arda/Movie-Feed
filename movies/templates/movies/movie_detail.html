@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-4">
+        <img
+            src="{{ movie.poster_url }}"
+            class="img-fluid rounded"
+        >
+    </div>
+
+    <div class="col-md-8">
+
+        <h1>{{ movie.title }}</h1>
+
+        <p class="text-secondary">
+            {{ movie.release_year }} • {{ movie.genre }}
+        </p>
+
+        <p>
+            {{ movie.description }}
+        </p>
+
+        <hr>
+
+        <h4>
+            ⭐ Average Rating:
+            {{ avg_rating|default:"No ratings yet" }}
+        </h4>
+
+        <form
+            method="POST"
+            action="{% url 'add_rating' movie.id %}"
+            class="mb-4"
+        >
+            {% csrf_token %}
+
+            <div class="star-rating">
+
+                <input type="radio" name="score" value="5" id="5">
+                <label for="5">★</label>
+
+                <input type="radio" name="score" value="4" id="4">
+                <label for="4">★</label>
+
+                <input type="radio" name="score" value="3" id="3">
+                <label for="3">★</label>
+
+                <input type="radio" name="score" value="2" id="2">
+                <label for="2">★</label>
+
+                <input type="radio" name="score" value="1" id="1">
+                <label for="1">★</label>
+
+            </div>
+
+            <br><br>
+
+            <button class="btn btn-warning">
+                Submit Rating
+            </button>
+        </form>
+
+        <a
+            href="{% url 'toggle_watchlist' movie.id %}"
+            class="btn btn-danger mb-4"
+        >
+            ❤️ Watchlist
+        </a>
+
+        <hr>
+
+        <h3>💬 Comments</h3>
+
+        {% for review in movie.reviews.all %}
+
+            <div class="card bg-dark text-white p-3 mb-3">
+
+                <strong>
+                    {{ review.user.username }}
+                </strong>
+
+                <p class="mt-2">
+                    {{ review.text }}
+                </p>
+
+            </div>
+
+        {% empty %}python manage.py runserver 
+
+            <p>No comments yet.</p>
+
+        {% endfor %}
+
+        <hr>
+
+        <h3>Add Comment</h3>
+
+        <form
+            method="POST"
+            action="{% url 'add_review' movie.id %}"
+        >
+            {% csrf_token %}
+
+            <textarea
+                name="text"
+                class="form-control mb-3"
+                rows="4"
+                placeholder="Write your comment..."
+            ></textarea>
+
+            <button class="btn btn-primary">
+                Add Comment
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
