@@ -1,4 +1,4 @@
-#  MovieFeed - Django Movie Platform
+#  MovieFeed - Movie Platform
 
 MovieFeed is a Django-based movie web application where users can register, log in, browse movies, view details, and manage a personal watchlist.
 
